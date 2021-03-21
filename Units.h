@@ -12,38 +12,42 @@ public:
     UnitType type = None;
 };
 
-class RockUnit : Unit {
+class RockUnit : public Unit {
+public:
     RockUnit();
 };
 
-class PaperUnit : Unit {
+class PaperUnit : public Unit {
+public:
     PaperUnit();
 };
 
-class ScissorsUnit : Unit {
+class ScissorsUnit : public Unit {
+public:
     ScissorsUnit();
 };
 
-class Knight : RockUnit {
+class Knight : public RockUnit {
+public:
     // Concrete sprites will be stored here
 };
 
-class CrossbowMan : ScissorsUnit {
+class CrossbowMan : public ScissorsUnit {
     // Concrete sprites will be stored here
 };
 
-class Berserk : PaperUnit {
+class Berserk : public PaperUnit {
     // Concrete sprites will be stored here
 };
 
-class Werewolf : PaperUnit {
+class Werewolf : public PaperUnit {
     // Concrete sprites will be stored here
 };
 
-class Ent : RockUnit {
+class Ent : public RockUnit {
     // Concrete sprites will be stored here
 };
 
-class WoodElf : ScissorsUnit {
+class WoodElf : public ScissorsUnit {
     // Concrete sprites will be stored here
 };

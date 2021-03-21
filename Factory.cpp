@@ -1,26 +1,26 @@
 #include "Factory.h"
 
-RockUnit& RoyalFactory::CreateRockUnit() override {
+RockUnit& RoyalFactory::CreateRockUnit() {
     return *(new Knight);
 }
 
-PaperUnit& RoyalFactory::CreatePaperUnit() override  {
+PaperUnit& RoyalFactory::CreatePaperUnit()  {
     return *(new Berserk);
 }
 
-ScissorsUnit& RoyalFactory::CreateScissorsUnit() override {
+ScissorsUnit& RoyalFactory::CreateScissorsUnit() {
     return *(new CrossbowMan);
 }
 
 
-RockUnit& ForestFactory::CreateRockUnit() override {
+RockUnit& ForestFactory::CreateRockUnit() {
     return *(new Ent);
 }
 
-PaperUnit& ForestFactory::CreatePaperUnit() override {
+PaperUnit& ForestFactory::CreatePaperUnit() {
     return *(new Werewolf);
 }
 
-ScissorsUnit& ForestFactory::CreateScissorsUnit() override {
+ScissorsUnit& ForestFactory::CreateScissorsUnit() {
     return *(new WoodElf);
 }

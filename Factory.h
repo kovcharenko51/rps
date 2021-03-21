@@ -1,10 +1,12 @@
-#include "Unit"
+#pragma once
+
+#include "Units.h"
 
 class UnitFactory {
 public:
-    virtual RockUnit& CreateRockUnit();
-    virtual PaperUnit& CreatePaperUnit();
-    virtual ScissorsUnit& CreateScissorsUnit();
+    virtual RockUnit& CreateRockUnit() = 0;
+    virtual PaperUnit& CreatePaperUnit() = 0;
+    virtual ScissorsUnit& CreateScissorsUnit() = 0;
 
 };
 
