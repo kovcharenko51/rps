@@ -5,11 +5,17 @@ private:
     void Attack();
     void Die();
     void Idle();
+
+    UnitFactory* factory;
+
 public:
     enum UnitType {
         None, Rock, Paper, Scissors
     };
     UnitType type = None;
+
+    UnitFactory* GetFactory();
+
 };
 
 class RockUnit : public Unit {
