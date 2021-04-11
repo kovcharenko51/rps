@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -rdynamic CMakeFiles/RPS.dir/Factory.cpp.o CMakeFiles/RPS.dir/Units.cpp.o CMakeFiles/RPS.dir/Squad.cpp.o CMakeFiles/RPS.dir/main.cpp.o -o ../bin/RPS 
