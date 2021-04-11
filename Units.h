@@ -17,12 +17,18 @@ public:
 };
 
 class RockUnit : public Unit {
+public:
+    RockUnit();
 };
 
 class PaperUnit : public Unit {
+public:
+    PaperUnit();
 };
 
 class ScissorsUnit : public Unit {
+public:
+    ScissorsUnit();
 };
 
 class Knight : public RockUnit {

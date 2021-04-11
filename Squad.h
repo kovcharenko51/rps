@@ -21,10 +21,11 @@ public:
 class EconomicDecorator {
 private:
     Squad* squad_;
-    unsigned int balance_;
+    unsigned int& balance_;
 
 public:
     EconomicDecorator(Squad*, unsigned int&);
-    void InsertUnit(size_t, Unit*);
+    bool InsertUnit(size_t, Unit*);
     void RemoveUnit(size_t);
+    size_t GetSquadSize();
 };

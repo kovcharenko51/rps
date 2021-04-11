@@ -19,6 +19,20 @@ void Unit::Idle() {
     // Draw idle
 }
 
+
+RockUnit::RockUnit() {
+    type = UnitType::Rock;
+}
+
+PaperUnit::PaperUnit() {
+    type = UnitType::Paper;
+}
+
+ScissorsUnit::ScissorsUnit() {
+    type = UnitType::Scissors;
+}
+
+
 Knight::Knight(unsigned int cost) {
     cost_ = cost;
 }

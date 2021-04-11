@@ -1,11 +1,14 @@
 #include "Factory.h"
 
+#include <iostream>
+
 void UnitFactory::DeleteUnit(Unit* unit) {
     delete unit;
 }
 
-Unit& RoyalFactory::CreateUnit(Unit::UnitType unit_type) {
+Unit* RoyalFactory::CreateUnit(Unit::UnitType unit_type) {
     Unit* unit;
+    std::cerr << "creating " << (int)unit_type << std::endl;
     switch (unit_type) {
         case Unit::Rock:
             unit = new Knight(RockCost);
@@ -19,10 +22,10 @@ Unit& RoyalFactory::CreateUnit(Unit::UnitType unit_type) {
         case Unit::None:
             unit = nullptr;
     }
-    return *unit;
+    return unit;
 }
 
-Unit& ForestFactory::CreateUnit(Unit::UnitType unit_type) {
+Unit* ForestFactory::CreateUnit(Unit::UnitType unit_type) {
     Unit* unit;
     switch (unit_type) {
         case Unit::Rock:
@@ -37,5 +40,5 @@ Unit& ForestFactory::CreateUnit(Unit::UnitType unit_type) {
         case Unit::None:
             unit = nullptr;
     }
-    return *unit;
+    return unit;
 }

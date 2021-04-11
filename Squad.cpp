@@ -20,18 +20,25 @@ size_t BattleDecorator::GetSquadSize() {
     return squad_->units.size();
 }
 
-EconomicDecorator::EconomicDecorator(Squad* squad, unsigned int& balance) : squad_(squad), balance_(balance){
+
+EconomicDecorator::EconomicDecorator(Squad* squad, unsigned int& balance) : 
+        squad_(squad), balance_(balance) {
 }
 
-void EconomicDecorator::InsertUnit(size_t ind, Unit* unit) {
+bool EconomicDecorator::InsertUnit(size_t ind, Unit* unit) {
     if (balance_ < unit->GetCost()) {
-        return;
+        return false;
     }
     balance_ -= unit->GetCost();
     squad_->units.insert(squad_->units.begin() + ind, unit);
+    return true;
 }
 
 void EconomicDecorator::RemoveUnit(size_t ind) {
     balance_ += squad_->units[ind]->GetCost();
     squad_->units.erase(squad_->units.begin() + ind);
+}
+
+size_t EconomicDecorator::GetSquadSize() {
+    return squad_->units.size();
 }
