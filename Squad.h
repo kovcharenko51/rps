@@ -7,16 +7,24 @@ struct Squad {
     std::vector<Unit*> units;
 };
 
-class ButtleDecorator {
+class BattleDecorator {
 private:
-    Squad* squad;
-
-    
+    Squad* squad_;
 
 public:
-    ButtleDecorator(Squad* squad);
+    explicit BattleDecorator(Squad*);
     const Unit* GetCurrentUnit();
     void KillCurrentUnit();
     size_t GetSquadSize();
+};
 
+class EconomicDecorator {
+private:
+    Squad* squad_;
+    unsigned int balance_;
+
+public:
+    EconomicDecorator(Squad*, unsigned int&);
+    void InsertUnit(size_t, Unit*);
+    void RemoveUnit(size_t);
 };

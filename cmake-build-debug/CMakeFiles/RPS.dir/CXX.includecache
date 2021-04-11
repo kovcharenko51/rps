@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/sosnickiy/rps/Factory.cpp
+Factory.h
+/home/sosnickiy/rps/Factory.h
+
+/home/sosnickiy/rps/Factory.h
+Units.h
+/home/sosnickiy/rps/Units.h
+
+/home/sosnickiy/rps/Squad.cpp
+Squad.h
+/home/sosnickiy/rps/Squad.h
+Factory.h
+/home/sosnickiy/rps/Factory.h
+
+/home/sosnickiy/rps/Squad.h
+vector
+-
+Units.h
+/home/sosnickiy/rps/Units.h
+
+/home/sosnickiy/rps/Units.cpp
+Units.h
+/home/sosnickiy/rps/Units.h
+
+/home/sosnickiy/rps/Units.h
+
+/home/sosnickiy/rps/main.cpp
+iostream
+-
+Factory.h
+/home/sosnickiy/rps/Factory.h
+

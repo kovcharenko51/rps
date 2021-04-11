@@ -4,42 +4,38 @@ void UnitFactory::DeleteUnit(Unit* unit) {
     delete unit;
 }
 
-
-RoyalFactory::RoyalFactory() {}
-
-RoyalFactory* RoyalFactory::GetInstance() {
-    static RoyalFactory singleton;
-    return &singleton;
+Unit& RoyalFactory::CreateUnit(Unit::UnitType unit_type) {
+    Unit* unit;
+    switch (unit_type) {
+        case Unit::Rock:
+            unit = new Knight(RockCost);
+            break;
+        case Unit::Paper:
+            unit = new Berserk(PaperCost);
+            break;
+        case Unit::Scissors:
+            unit = new CrossbowMan(ScissorsCost);
+            break;
+        case Unit::None:
+            unit = nullptr;
+    }
+    return *unit;
 }
 
-RockUnit& RoyalFactory::CreateRockUnit() {
-    return *(new Knight);
-}
-
-PaperUnit& RoyalFactory::CreatePaperUnit()  {
-    return *(new Berserk);
-}
-
-ScissorsUnit& RoyalFactory::CreateScissorsUnit() {
-    return *(new CrossbowMan);
-}
-
-
-ForestFactory::ForestFactory() {}
-
-ForestFactory* ForestFactory::GetInstance() {
-    static ForestFactory singleton;
-    return &singleton;
-}
-
-RockUnit& ForestFactory::CreateRockUnit() {
-    return *(new Ent);
-}
-
-PaperUnit& ForestFactory::CreatePaperUnit() {
-    return *(new Werewolf);
-}
-
-ScissorsUnit& ForestFactory::CreateScissorsUnit() {
-    return *(new WoodElf);
+Unit& ForestFactory::CreateUnit(Unit::UnitType unit_type) {
+    Unit* unit;
+    switch (unit_type) {
+        case Unit::Rock:
+            unit = new Ent();
+            break;
+        case Unit::Paper:
+            unit = new Werewolf();
+            break;
+        case Unit::Scissors:
+            unit = new WoodElf();
+            break;
+        case Unit::None:
+            unit = nullptr;
+    }
+    return *unit;
 }

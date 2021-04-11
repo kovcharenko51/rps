@@ -1,5 +1,12 @@
 #include "Units.h"
 
+Unit::Unit(unsigned int cost) : cost_(cost) {
+}
+
+unsigned int Unit::GetCost() {
+    return cost_;
+}
+
 void Unit::Attack() {
     // Draw attack
 }
@@ -12,14 +19,14 @@ void Unit::Idle() {
     // Draw idle
 }
 
-RockUnit::RockUnit() {
-    type = Rock;
+Knight::Knight(unsigned int cost) {
+    cost_ = cost;
 }
 
-PaperUnit::PaperUnit() {
-    type = Paper;
+Berserk::Berserk(unsigned int cost) {
+    cost_ = cost;
 }
 
-ScissorsUnit::ScissorsUnit() {
-    type = Scissors;
+CrossbowMan::CrossbowMan(unsigned int cost) {
+    cost_ = cost;
 }
