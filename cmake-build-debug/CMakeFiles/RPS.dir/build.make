@@ -143,6 +143,10 @@ RPS_EXTERNAL_OBJECTS =
 ../bin/RPS: CMakeFiles/RPS.dir/Squad.cpp.o
 ../bin/RPS: CMakeFiles/RPS.dir/main.cpp.o
 ../bin/RPS: CMakeFiles/RPS.dir/build.make
+../bin/RPS: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1
+../bin/RPS: /usr/lib/x86_64-linux-gnu/libsfml-audio.so.2.5.1
+../bin/RPS: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1
+../bin/RPS: /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
 ../bin/RPS: CMakeFiles/RPS.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sosnickiy/rps/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable ../bin/RPS"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/RPS.dir/link.txt --verbose=$(VERBOSE)

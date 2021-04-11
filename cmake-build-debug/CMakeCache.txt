@@ -232,6 +232,15 @@ RPS_BINARY_DIR:STATIC=/home/sosnickiy/rps/cmake-build-debug
 //Value Computed by CMake
 RPS_SOURCE_DIR:STATIC=/home/sosnickiy/rps
 
+//The directory containing a CMake configuration file for SFML-2.5.1.
+SFML-2.5.1_DIR:PATH=SFML-2.5.1_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for SFML.
+SFML_DIR:PATH=SFML_DIR-NOTFOUND
+
+//Path to a file.
+SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND
+
 
 ########################
 # INTERNAL cache entries
