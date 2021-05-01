@@ -66,19 +66,19 @@ void SFMLEngine::Reset() {
     window.clear();
 }
 
-void SFMLEngine::DrawUnit(int unit_index, int state_index, bool isOnRight) {
+void SFMLEngine::DrawUnit(int unit_index, int state_index, bool is_on_right) {
     if (unit_index == -1) return;
     sf::IntRect rect(tile_size * state_index, tile_size * unit_index, tile_size, tile_size);
     sf::Sprite unit(units, rect);
     
-    int xPosition = scaled_tile_size / 2;
-    xPosition = isOnRight ? window.getSize().x - xPosition : xPosition;
-    int yPosition = scaled_tile_size / 2;
-    unit.setPosition(xPosition, yPosition);
+    int x_position = scaled_tile_size / 2;
+    x_position = is_on_right ? window.getSize().x - x_position : x_position;
+    int y_position = scaled_tile_size / 2;
+    unit.setPosition(x_position, y_position);
 
-    int xScale = isOnRight ? -scale : scale;
-    int yScale = scale;
-    unit.setScale(xScale, yScale);
+    int x_scale = is_on_right ? -scale : scale;
+    int y_scale = scale;
+    unit.setScale(x_scale, y_scale);
     window.draw(unit);
 }
 
