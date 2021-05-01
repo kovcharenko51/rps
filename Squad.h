@@ -10,7 +10,6 @@ struct Squad {
 class BattleDecorator {
 private:
     Squad* squad_;
-
 public:
     explicit BattleDecorator(Squad*);
     const Unit* GetCurrentUnit();
@@ -22,7 +21,6 @@ class EconomicDecorator {
 private:
     Squad* squad_;
     unsigned int& balance_;
-
 public:
     EconomicDecorator(Squad*, unsigned int&);
     bool InsertUnit(size_t, Unit*);

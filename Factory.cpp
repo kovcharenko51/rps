@@ -1,6 +1,6 @@
-#include "Factory.h"
-
 #include <iostream>
+
+#include "Factory.h"
 
 void UnitFactory::DeleteUnit(Unit* unit) {
     delete unit;
@@ -8,7 +8,6 @@ void UnitFactory::DeleteUnit(Unit* unit) {
 
 Unit* RoyalFactory::CreateUnit(Unit::UnitType unit_type) {
     Unit* unit;
-    std::cerr << "creating " << (int)unit_type << std::endl;
     switch (unit_type) {
         case Unit::Rock:
             unit = new Knight(RockCost);
