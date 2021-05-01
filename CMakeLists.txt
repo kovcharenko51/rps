@@ -6,7 +6,8 @@ project(RPS)
 set(EXECUTABLE_NAME "RPS")
 
 set(MAIN_SOURCE main.cpp)
-set(SOURCES Engine.cpp Factory.cpp Units.cpp Squad.cpp ${MAIN_SOURCE})
+
+set(SOURCES Engine.cpp SceneManager.cpp EconomyScene.cpp BattleScene.cpp EconomyManager.cpp Script.cpp DrawableObject.cpp BattleManager.cpp Scene.cpp Factory.cpp Units.cpp Squad.cpp ${MAIN_SOURCE})
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
