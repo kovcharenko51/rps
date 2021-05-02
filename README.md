@@ -2,7 +2,7 @@
 From main dir:
 
 to install
-```mkdir build && cd build && cmake .. && make```
+```mkdir build && cd build && cmake .. && make && cd ..```
 
 to uninstall
 ```rm -rf build bin```

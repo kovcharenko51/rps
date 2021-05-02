@@ -11,12 +11,15 @@ private:
     static const int scale = 10;
     static const int scaled_tile_size = scale * tile_size;
 
-    const std::vector<std::string> texture_filenames_;
+    const std::vector<std::string> texture_filenames_ = { 
+        "Graphics/units.png",
+        "Graphics/backgrounds.png",
+    };
     std::unordered_map<std::string, sf::Texture> textures_;
     
     std::deque<DrawableObject> buffer_;
 
-    sf::RenderWindow window_;
+    mutable sf::RenderWindow window_;
     
     DrawManager();
 public:
@@ -28,6 +31,8 @@ public:
     template <typename Container>
     void AddDrawableObjects(const Container&);
     void Draw();
+
+    bool IsOpen() const;
 };
 
 struct DrawableObject {
@@ -39,5 +44,4 @@ struct DrawableObject {
     DrawableObject() = default;
     template <typename... Args>
     DrawableObject(std::string,Args...);
-    DrawableObject(std::string,const sf::IntRect&,sf::Vector2i,sf::Vector2i);
 };
