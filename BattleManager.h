@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BattleScene.h"
+#include "DrawManager.h"
 #include "Scene.h"
 #include "Script.h"
 #include "Squad.h"

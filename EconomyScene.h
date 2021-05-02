@@ -5,5 +5,6 @@
 class EconomyScene : public Scene {
 private:
 public:
+    EconomyScene();
     void HandleInput();
 };

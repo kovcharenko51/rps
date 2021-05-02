@@ -22,5 +22,8 @@ void BattleManager::Fight(BattleDecorator& ally_decorator, BattleDecorator& enem
 }
 
 void BattleManager::Update() {
-    scene_->list_to_draw_.push_back(new DrawableObject());
+    scene_->list_to_draw_.push_back(DrawableObject("Graphics/units.png",
+                                                       sf::IntRect(32, 0 * 32, 32, 32),
+                                                       sf::Vector2i(0, 0),
+                                                       sf::Vector2i(8, 8)));
 }

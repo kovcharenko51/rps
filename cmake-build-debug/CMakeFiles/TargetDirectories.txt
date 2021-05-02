@@ -1,3 +1,0 @@
-/home/sosnickiy/rps/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/sosnickiy/rps/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/sosnickiy/rps/cmake-build-debug/CMakeFiles/RPS.dir

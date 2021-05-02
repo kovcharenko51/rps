@@ -1,3 +1,5 @@
+#pragma once
+
 #include <bits/stdc++.h>
 #include <SFML/Graphics.hpp>
 
@@ -34,6 +36,7 @@ struct DrawableObject {
     sf::Vector2i position_;
     sf::Vector2i scale_;
 
+    DrawableObject() = default;
     template <typename... Args>
     DrawableObject(std::string,Args...);
     DrawableObject(std::string,const sf::IntRect&,sf::Vector2i,sf::Vector2i);
