@@ -6,6 +6,21 @@
 struct DrawableObject;
 
 class DrawManager {
+public:
+    enum Unit {
+        Knight      = 0,
+        CrossbowMan = 1,
+        Berserk     = 2,
+        Ent         = 3,
+        WoodenElf   = 4,
+        Werewolf    = 5,
+    };
+
+    enum State {
+        Idle        = 0,
+        Attack      = 1,
+        Death       = 2,
+    };
 private:
     static const int tile_size = 32;
     static const int scale = 10;
@@ -27,10 +42,13 @@ public:
     DrawManager& operator=(const DrawManager&) = delete;
 
     static DrawManager& GetInstance();
+
     void AddDrawableObject(const DrawableObject&);
     template <typename Container>
     void AddDrawableObjects(const Container&);
     void Draw();
+
+    DrawableObject GetDrawableObjectForUnit(Unit, State) const;
 
     bool IsOpen() const;
 };
@@ -38,10 +56,9 @@ public:
 struct DrawableObject {
     std::string filename_;
     sf::IntRect rect_;
-    sf::Vector2i position_;
-    sf::Vector2i scale_;
+    sf::Vector2i position_ = sf::Vector2i(0, 0);
+    sf::Vector2i scale_ = sf::Vector2i(1, 1);
 
     DrawableObject() = default;
-    template <typename... Args>
-    DrawableObject(std::string,Args...);
+    DrawableObject(std::string, const sf::IntRect&, sf::Vector2i = sf::Vector2i(0, 0), sf::Vector2i = sf::Vector2i(1, 1));
 };

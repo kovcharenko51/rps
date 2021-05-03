@@ -52,6 +52,11 @@ bool DrawManager::IsOpen() const {
     return window_.isOpen();
 }
 
+DrawableObject DrawManager::GetDrawableObjectForUnit(Unit unit, State state) const {
+    sf::IntRect rect(state * tile_size, unit * tile_size, tile_size, tile_size);
+    return DrawableObject("Graphics/units.png", rect);
+}
+
 
 DrawableObject::DrawableObject(std::string filename, const sf::IntRect& rect, sf::Vector2i position, sf::Vector2i scale)
     : filename_(filename), rect_(rect), position_(position), scale_(scale) {
