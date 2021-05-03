@@ -14,4 +14,5 @@ public:
     Scene(sf::Clock&);
     void Update();
     std::vector<DrawableObject> list_to_draw_;
+    virtual ~Scene() = default;
 };

@@ -11,6 +11,7 @@ class BattleDecorator {
 private:
     Squad* squad_;
 public:
+    BattleDecorator() = default;
     explicit BattleDecorator(Squad*);
     const Unit* GetCurrentUnit();
     void KillCurrentUnit();

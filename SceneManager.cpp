@@ -1,9 +1,9 @@
 #include "SceneManager.h"
 
-void SceneManager::CreateScene(SceneType scene_type, sf::Clock& clock, BattleDecorator& ally_dec, BattleDecorator& enemy_dec) {
+void SceneManager::CreateScene(SceneType scene_type, sf::Clock& clock, Squad* squad) {
     switch (scene_type) {
         case Battle:
-            cur_scene_ = new BattleScene(clock, ally_dec, enemy_dec);
+            cur_scene_ = std::make_shared<Scene>(BattleScene(clock, squad));
             break;
         case Economy:
 //            cur_scene_ = new EconomyScene();
@@ -13,6 +13,6 @@ void SceneManager::CreateScene(SceneType scene_type, sf::Clock& clock, BattleDec
     }
 }
 
-Scene* SceneManager::GetScene() {
+std::shared_ptr<Scene> SceneManager::GetScene() {
     return cur_scene_;
 }
