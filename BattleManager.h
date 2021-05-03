@@ -8,9 +8,9 @@
 
 class BattleManager : public Script {
 private:
-    Scene* scene_;
+    std::shared_ptr<Scene> scene_;
 public:
-    BattleManager(Scene*);
+    BattleManager(std::shared_ptr<Scene>);
     void Fight(BattleDecorator&, BattleDecorator&);
     void Update();
 };

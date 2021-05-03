@@ -4,10 +4,8 @@
 #include "Squad.h"
 
 class BattleScene : public Scene {
-private:
-    BattleDecorator& ally_decorator_;
-    BattleDecorator& enemy_decorator_;
 public:
-    BattleScene();
-    BattleScene(sf::Clock&, BattleDecorator&, BattleDecorator&);
+    BattleDecorator ally_decorator;
+    BattleDecorator enemy_decorator;
+    BattleScene(sf::Clock&, Squad*);
 };
