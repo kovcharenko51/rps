@@ -8,6 +8,7 @@ int main() {
     sf::Clock game_clock;
     SceneManager scene_manager;
     scene_manager.CreateScene(SceneManager::Economy, game_clock, squad);
+
     while (drawer.IsOpen()) {
         game_clock.restart();
         if (scene_manager.GetScene()->has_finished) {

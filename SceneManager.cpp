@@ -4,15 +4,14 @@ void SceneManager::CreateScene(SceneType scene_type, sf::Clock& clock, Squad* sq
     switch (scene_type) {
         case Battle:
             cur_scene_ = std::make_shared<Scene>(BattleScene(clock, squad));
-            cur_type = Battle;
             break;
         case Economy:
-//            cur_scene_ = new EconomyScene();
-            cur_type = Economy;
+            cur_scene_ = std::make_shared<Scene>(EconomyScene(clock, squad));
             break;
         default:
             break;
     }
+    cur_type = scene_type;
 }
 
 std::shared_ptr<Scene> SceneManager::GetScene() {
