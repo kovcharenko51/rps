@@ -6,7 +6,7 @@ void SceneManager::CreateScene(SceneType scene_type, sf::Clock& clock, Squad* sq
             cur_scene_ = std::make_shared<Scene>(BattleScene(clock, squad));
             break;
         case Economy:
-//            cur_scene_ = new EconomyScene();
+            // cur_scene_ = std::make_shared<Scene>(EconomyScene(clock, squad));
             break;
         default:
             break;
