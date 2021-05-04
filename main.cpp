@@ -22,8 +22,9 @@ int main() {
                 default:
                     break;
             }
-
         }
         scene_manager.GetScene()->Update();
+        drawer.AddDrawableObjects(scene_manager.GetScene()->list_to_draw_);
+        drawer.Draw();
     }
 }

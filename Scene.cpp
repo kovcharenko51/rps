@@ -1,8 +1,6 @@
 #include "Scene.h"
 
 Scene::Scene(sf::Clock& clock) : clock(clock) {
-    Script* script = new BackgroundAdder(*this);
-    script_vector.emplace_back();
 }
 
 void Scene::Update() {
@@ -12,12 +10,12 @@ void Scene::Update() {
     }
 }
 
-BackgroundAdder::BackgroundAdder(Scene& scene) : Script(scene) {
+BackgroundAdder::BackgroundAdder(Scene& scene, DrawableObject::Background background) 
+    : scene_(scene), background_(background) {
 }
 
 void BackgroundAdder::Update() {
-    scene_->list_to_draw_.clear();
-    scene_->list_to_draw_.emplace_back(DrawManager::GetInstance().GetDrawableObjectForBackground(scene_->background));
+    scene_.list_to_draw_.emplace_back(DrawableObject::FromBackground(background_));
 }
 
 Scene::~Scene() {

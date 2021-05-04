@@ -1,6 +1,6 @@
 #include "BattleManager.h"
 
-BattleManager::BattleManager(Scene& scene) : Script(scene) {
+BattleManager::BattleManager(Scene& scene) : scene_(dynamic_cast<BattleScene&>(scene)) {
 }
 
 void BattleManager::Prepare(BattleDecorator& ally_decorator, BattleDecorator& enemy_decorator) {
@@ -56,28 +56,27 @@ void BattleManager::Pop(BattleDecorator& ally_decorator, BattleDecorator& enemy_
 }
 
 void BattleManager::Update() {
-    auto scene = dynamic_cast<BattleScene*>(scene_.get());
-    if ((scene->ally_decorator.GetSquadSize() == 0) && (scene->enemy_decorator.GetSquadSize() == 0)) {
-        scene_->has_finished = true;
+    if ((scene_.ally_decorator.GetSquadSize() == 0) && (scene_.enemy_decorator.GetSquadSize() == 0)) {
+        scene_.has_finished = true;
         return;
     }
     if (freeze_time <= 0) {
         switch (phase) {
             case PreparePhase:
-                Attack(scene->ally_decorator, scene->enemy_decorator);
+                Attack(scene_.ally_decorator, scene_.enemy_decorator);
                 break;
             case AttackPhase:
-                Kill(scene->ally_decorator, scene->enemy_decorator);
+                Kill(scene_.ally_decorator, scene_.enemy_decorator);
                 break;
             case KillPhase:
-                Pop(scene->ally_decorator, scene->enemy_decorator);
+                Pop(scene_.ally_decorator, scene_.enemy_decorator);
                 return;
             default:
                 break;
         }
     }
-    Unit* ally_unit = scene->ally_decorator.GetCurrentUnit();
-    Unit* enemy_unit = scene->ally_decorator.GetCurrentUnit();
-    scene_->list_to_draw_.emplace_back(DrawManager::GetInstance().GetDrawableObjectForUnit(ally_unit->sprite_type, ally_unit->state, false));
-    scene_->list_to_draw_.emplace_back(DrawManager::GetInstance().GetDrawableObjectForUnit(enemy_unit->sprite_type, enemy_unit->state, true));
+    Unit* ally_unit = scene_.ally_decorator.GetCurrentUnit();
+    Unit* enemy_unit = scene_.ally_decorator.GetCurrentUnit();
+    scene_.list_to_draw_.emplace_back(DrawableObject::FromUnit(ally_unit->sprite_type, ally_unit->state));
+    scene_.list_to_draw_.emplace_back(DrawableObject::FromUnit(enemy_unit->sprite_type, enemy_unit->state));
 }

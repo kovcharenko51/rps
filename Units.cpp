@@ -8,15 +8,15 @@ unsigned int Unit::GetCost() {
 }
 
 void Unit::Attack() {
-    state = DrawManager::Attack;
+    state = DrawableObject::Attack;
 }
 
 void Unit::Die() {
-    state = DrawManager::Death;
+    state = DrawableObject::Death;
 }
 
 void Unit::Idle() {
-    state = DrawManager::Idle;
+    state = DrawableObject::Idle;
 }
 
 
@@ -35,27 +35,27 @@ ScissorsUnit::ScissorsUnit() {
 
 Knight::Knight(unsigned int cost) {
     cost_ = cost;
-    sprite_type = DrawManager::Knight;
+    sprite_type = DrawableObject::Knight;
 }
 
 Berserk::Berserk(unsigned int cost) {
     cost_ = cost;
-    sprite_type = DrawManager::Berserk;
+    sprite_type = DrawableObject::Berserk;
 }
 
 CrossbowMan::CrossbowMan(unsigned int cost) {
     cost_ = cost;
-    sprite_type = DrawManager::CrossbowMan;
+    sprite_type = DrawableObject::CrossbowMan;
 }
 
 Werewolf::Werewolf() {
-    sprite_type = DrawManager::Werewolf;
+    sprite_type = DrawableObject::Werewolf;
 }
 
 Ent::Ent() {
-    sprite_type = DrawManager::Ent;
+    sprite_type = DrawableObject::Ent;
 }
 
 WoodElf::WoodElf() {
-    sprite_type = DrawManager::WoodElf;
+    sprite_type = DrawableObject::WoodElf;
 }

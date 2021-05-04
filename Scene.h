@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Script.h"
-#include "DrawableObject.h"
 #include "DrawManager.h"
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -12,16 +11,17 @@ protected:
     std::vector<Script*> script_vector;
 public:
     bool has_finished = false;
-    Scene() = default;
     Scene(sf::Clock&);
     void Update();
     std::vector<DrawableObject> list_to_draw_;
-    DrawManager::Background background;
     virtual ~Scene();
 };
 
 class BackgroundAdder : public Script {
+protected:
+    Scene& scene_;
+    DrawableObject::Background background_;
 public:
-    BackgroundAdder(Scene&);
+    BackgroundAdder(Scene&, DrawableObject::Background);
     void Update() override;
 };

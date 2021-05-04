@@ -44,7 +44,7 @@ struct DrawableObject {
         CrossbowMan = 1,
         Berserk     = 2,
         Ent         = 3,
-        WoodenElf   = 4,
+        WoodElf     = 4,
         Werewolf    = 5,
     };
 

@@ -11,8 +11,8 @@ public:
         None, Rock, Paper, Scissors
     };
     UnitType type = None;
-    DrawManager::State state = DrawManager::Idle;
-    DrawManager::SpriteType sprite_type;
+    DrawableObject::State state = DrawableObject::Idle;
+    DrawableObject::Unit sprite_type;
     explicit Unit(unsigned int = 0);
     void Attack();
     void Die();

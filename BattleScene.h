@@ -2,7 +2,6 @@
 
 #include <cstdlib>
 #include "Scene.h"
-#include "BattleManager.h"
 #include "Squad.h"
 
 class BattleScene : public Scene {
