@@ -77,6 +77,6 @@ void BattleManager::Update() {
     }
     Unit* ally_unit = scene_.ally_decorator.GetCurrentUnit();
     Unit* enemy_unit = scene_.ally_decorator.GetCurrentUnit();
-    scene_.list_to_draw_.emplace_back(DrawableObject::FromUnit(ally_unit->sprite_type, ally_unit->state));
-    scene_.list_to_draw_.emplace_back(DrawableObject::FromUnit(enemy_unit->sprite_type, enemy_unit->state));
+    scene_.list_to_draw_.emplace_back(DrawableObject::FromUnit(ally_unit->sprite_type, ally_unit->state, false));
+    scene_.list_to_draw_.emplace_back(DrawableObject::FromUnit(enemy_unit->sprite_type, enemy_unit->state, true));
 }

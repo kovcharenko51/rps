@@ -36,9 +36,15 @@ public:
     void Draw();
 
     bool IsOpen() const;
+
+    sf::Window& GetWindow() const;
 };
 
 struct DrawableObject {
+    static const int tile_size = 32;
+    static const int scale = 10;
+    static const int scaled_tile_size = scale * tile_size;
+
     enum Unit {
         Knight      = 0,
         CrossbowMan = 1,
@@ -76,7 +82,7 @@ struct DrawableObject {
         RightClosed = 3 * 8 + 2,
     };
 
-    static DrawableObject FromUnit(Unit, State);
+    static DrawableObject FromUnit(Unit, State, bool);
     static DrawableObject FromBackground(Background);
     static DrawableObject FromIcon(Icon);
 

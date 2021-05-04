@@ -3,13 +3,11 @@
 #include <vector>
 
 int main() {
-    DrawManager& drawer = DrawManager::GetInstance();
     auto squad = new Squad();
     sf::Clock game_clock;
-    SceneManager scene_manager;
+    SceneManager scene_manager = SceneManager();
     scene_manager.CreateScene(SceneManager::Economy, game_clock, squad);
-
-    while (drawer.IsOpen()) {
+    while (DrawManager::GetInstance().IsOpen()) {
         game_clock.restart();
         if (scene_manager.GetScene()->has_finished) {
             switch (scene_manager.cur_type) {
@@ -24,7 +22,7 @@ int main() {
             }
         }
         scene_manager.GetScene()->Update();
-        drawer.AddDrawableObjects(scene_manager.GetScene()->list_to_draw_);
-        drawer.Draw();
+        DrawManager::GetInstance().AddDrawableObjects(scene_manager.GetScene()->list_to_draw_);
+        DrawManager::GetInstance().Draw();
     }
 }
