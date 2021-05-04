@@ -1,7 +1,7 @@
 #include "DrawManager.h"
 
 DrawManager::DrawManager()
-    : window_(sf::VideoMode(128, 72), "RoyalPhoenixStory", sf::Style::Close) {
+    : window_(sf::VideoMode(1280, 720), "RoyalPhoenixStory", sf::Style::Close) {
     for (const auto& filename: texture_filenames_) {
         if (!textures_[filename].loadFromFile(filename)) {
             throw std::runtime_error("Can't load " + filename);
@@ -65,7 +65,7 @@ DrawableObject DrawableObject::FromBackground(Background background) {
     const int width = 128;
     const int height = 72;
     sf::IntRect rect(0, background * height, width, height);
-    return DrawableObject("Graphics/backgrounds.png", rect);
+    return DrawableObject("Graphics/backgrounds.png", rect, sf::Vector2i(0, 0), sf::Vector2i(scale, scale));
 }
 
 DrawableObject DrawableObject::FromIcon(Icon icon) {

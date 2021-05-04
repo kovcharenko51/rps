@@ -4,11 +4,18 @@
 
 int main() {
     auto squad = new Squad();
+    squad->units.emplace_back(new CrossbowMan(10));
+    squad->units.emplace_back(new Knight(10));
+    squad->units.emplace_back(new CrossbowMan(10));
+    squad->units.emplace_back(new Berserk(10));
+    squad->units.emplace_back(new CrossbowMan(10));
+    squad->units.emplace_back(new Knight(10));
+    squad->units.emplace_back(new CrossbowMan(10));
+    squad->units.emplace_back(new Berserk(10));
     sf::Clock game_clock;
     SceneManager scene_manager = SceneManager();
-    scene_manager.CreateScene(SceneManager::Economy, game_clock, squad);
+    scene_manager.CreateScene(SceneManager::Battle, game_clock, squad);
     while (DrawManager::GetInstance().IsOpen()) {
-        game_clock.restart();
         if (scene_manager.GetScene()->has_finished) {
             switch (scene_manager.cur_type) {
                 case SceneManager::Battle:
@@ -22,6 +29,7 @@ int main() {
             }
         }
         scene_manager.GetScene()->Update();
+        game_clock.restart();
         DrawManager::GetInstance().AddDrawableObjects(scene_manager.GetScene()->list_to_draw_);
         DrawManager::GetInstance().Draw();
     }

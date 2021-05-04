@@ -13,7 +13,7 @@ void BattleManager::Prepare(BattleDecorator& ally_decorator, BattleDecorator& en
 void BattleManager::Attack(BattleDecorator& ally_decorator, BattleDecorator& enemy_decorator) {
     ally_decorator.GetCurrentUnit()->Attack();
     enemy_decorator.GetCurrentUnit()->Attack();
-    freeze_time = 0.5f;
+    freeze_time = 1.0f;
     phase = AttackPhase;
 }
 
@@ -53,15 +53,19 @@ void BattleManager::Pop(BattleDecorator& ally_decorator, BattleDecorator& enemy_
         enemy_decorator.KillCurrentUnit();
     }
     freeze_time = 0.0f;
+    phase = StartPhase;
 }
 
 void BattleManager::Update() {
-    if ((scene_.ally_decorator.GetSquadSize() == 0) && (scene_.enemy_decorator.GetSquadSize() == 0)) {
+    if ((scene_.ally_decorator.GetSquadSize() == 0) || (scene_.enemy_decorator.GetSquadSize() == 0)) {
         scene_.has_finished = true;
         return;
     }
     if (freeze_time <= 0) {
         switch (phase) {
+            case StartPhase:
+                Prepare(scene_.ally_decorator, scene_.enemy_decorator);
+                break;
             case PreparePhase:
                 Attack(scene_.ally_decorator, scene_.enemy_decorator);
                 break;
@@ -76,7 +80,7 @@ void BattleManager::Update() {
         }
     }
     Unit* ally_unit = scene_.ally_decorator.GetCurrentUnit();
-    Unit* enemy_unit = scene_.ally_decorator.GetCurrentUnit();
+    Unit* enemy_unit = scene_.enemy_decorator.GetCurrentUnit();
     scene_.list_to_draw_.emplace_back(DrawableObject::FromUnit(ally_unit->sprite_type, ally_unit->state, false));
     scene_.list_to_draw_.emplace_back(DrawableObject::FromUnit(enemy_unit->sprite_type, enemy_unit->state, true));
 }

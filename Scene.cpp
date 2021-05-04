@@ -1,12 +1,13 @@
 #include "Scene.h"
 
 Scene::Scene(sf::Clock& clock) : clock(clock) {
+    has_finished = false;
 }
 
 void Scene::Update() {
     for (auto script : script_vector) {
-        script->freeze_time -= clock.getElapsedTime().asSeconds();
         script->Update();
+        script->freeze_time -= clock.getElapsedTime().asSeconds();
     }
 }
 
@@ -15,7 +16,9 @@ BackgroundAdder::BackgroundAdder(Scene& scene, DrawableObject::Background backgr
 }
 
 void BackgroundAdder::Update() {
+    scene_.list_to_draw_.clear();
     scene_.list_to_draw_.emplace_back(DrawableObject::FromBackground(background_));
+    freeze_time = 0.0f;
 }
 
 Scene::~Scene() {
