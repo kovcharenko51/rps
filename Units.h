@@ -1,5 +1,7 @@
 #pragma once
 
+#include "DrawManager.h"
+
 class Unit {
 protected:
     unsigned int cost_ = 0;
@@ -9,11 +11,14 @@ public:
         None, Rock, Paper, Scissors
     };
     UnitType type = None;
+    DrawManager::State state = DrawManager::Idle;
+    DrawManager::SpriteType sprite_type;
     explicit Unit(unsigned int = 0);
     void Attack();
     void Die();
     void Idle();
     unsigned int GetCost();
+    virtual ~Unit() = default;
 };
 
 class RockUnit : public Unit {
@@ -47,13 +52,16 @@ public:
 };
 
 class Werewolf : public PaperUnit {
-    // Concrete sprites will be stored here
+public:
+    Werewolf();
 };
 
 class Ent : public RockUnit {
-    // Concrete sprites will be stored here
+public:
+    Ent();
 };
 
 class WoodElf : public ScissorsUnit {
-    // Concrete sprites will be stored here
+public:
+    WoodElf();
 };

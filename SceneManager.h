@@ -12,6 +12,7 @@ public:
     enum SceneType {
         Battle, Economy
     };
+    SceneType cur_type;
     void CreateScene(SceneType scene_type, sf::Clock& clock, Squad*);
     std::shared_ptr<Scene> GetScene();
 };

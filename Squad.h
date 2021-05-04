@@ -3,7 +3,8 @@
 #include <vector>
 #include "Units.h"
 
-struct Squad {
+class Squad {
+public:
     std::vector<Unit*> units;
 };
 
@@ -13,7 +14,7 @@ private:
 public:
     BattleDecorator() = default;
     explicit BattleDecorator(Squad*);
-    const Unit* GetCurrentUnit();
+    Unit* GetCurrentUnit();
     void KillCurrentUnit();
     size_t GetSquadSize();
 };

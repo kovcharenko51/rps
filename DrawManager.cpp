@@ -52,9 +52,21 @@ bool DrawManager::IsOpen() const {
     return window_.isOpen();
 }
 
-DrawableObject DrawManager::GetDrawableObjectForUnit(Unit unit, State state) const {
+DrawableObject DrawManager::GetDrawableObjectForUnit(SpriteType unit, State state, bool is_on_right) const {
     sf::IntRect rect(state * tile_size, unit * tile_size, tile_size, tile_size);
-    return DrawableObject("Graphics/units.png", rect);
+    int xPosition = scaled_tile_size / 2;
+    xPosition = is_on_right ? window_.getSize().x - xPosition : xPosition;
+    int yPosition = scaled_tile_size / 2;
+    int xScale = is_on_right ? -scale : scale;
+    int yScale = scale;
+    return DrawableObject("Graphics/units.png", rect, sf::Vector2i(xPosition, yPosition), sf::Vector2i(xScale, yScale));
+}
+
+DrawableObject DrawManager::GetDrawableObjectForBackground(Background background_index) {
+    float x = 16 * tile_size;
+    float y = 9 * tile_size;
+    sf::IntRect rect(0, y * background_index, x, y);
+    return DrawableObject("Graphics/backgrounds.png", rect, sf::Vector2i(0, 0), sf::Vector2i(scale, scale));
 }
 
 

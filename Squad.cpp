@@ -2,11 +2,10 @@
 
 #include "Factory.h"
 
-
 BattleDecorator::BattleDecorator(Squad* squad) : squad_(squad) {
 }
 
-const Unit* BattleDecorator::GetCurrentUnit() {
+Unit* BattleDecorator::GetCurrentUnit() {
     return squad_->units.back();
 }
 

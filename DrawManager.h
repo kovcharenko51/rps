@@ -7,12 +7,12 @@ struct DrawableObject;
 
 class DrawManager {
 public:
-    enum Unit {
+    enum SpriteType {
         Knight      = 0,
         CrossbowMan = 1,
         Berserk     = 2,
         Ent         = 3,
-        WoodenElf   = 4,
+        WoodElf     = 4,
         Werewolf    = 5,
     };
 
@@ -20,6 +20,9 @@ public:
         Idle        = 0,
         Attack      = 1,
         Death       = 2,
+    };
+    enum Background {
+        BattleBackground, EconomyBackground
     };
 private:
     static const int tile_size = 32;
@@ -48,7 +51,8 @@ public:
     void AddDrawableObjects(const Container&);
     void Draw();
 
-    DrawableObject GetDrawableObjectForUnit(Unit, State) const;
+    DrawableObject GetDrawableObjectForBackground(Background);
+    DrawableObject GetDrawableObjectForUnit(SpriteType, State, bool) const;
 
     bool IsOpen() const;
 };
