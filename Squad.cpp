@@ -26,7 +26,7 @@ EconomicDecorator::EconomicDecorator(Squad* squad, unsigned int& balance) :
 
 bool EconomicDecorator::InsertUnit(size_t ind, Unit* unit) {
     if (balance_ < unit->GetCost()) {
-        return false;
+        //return false;
     }
     balance_ -= unit->GetCost();
     squad_->units.insert(squad_->units.begin() + ind, unit);
@@ -36,6 +36,10 @@ bool EconomicDecorator::InsertUnit(size_t ind, Unit* unit) {
 void EconomicDecorator::RemoveUnit(size_t ind) {
     balance_ += squad_->units[ind]->GetCost();
     squad_->units.erase(squad_->units.begin() + ind);
+}
+
+const Squad& EconomicDecorator::GetSquad() {
+    return *squad_;
 }
 
 size_t EconomicDecorator::GetSquadSize() {

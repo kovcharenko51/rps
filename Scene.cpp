@@ -10,17 +10,18 @@ void Scene::Update() {
     }
 }
 
-BackgroundAdder::BackgroundAdder(Scene& scene, DrawableObject::Background background) 
-    : scene_(scene), background_(background) {
-}
-
-void BackgroundAdder::Update() {
-    scene_.list_to_draw_.emplace_back(DrawableObject::FromBackground(background_));
-}
-
 Scene::~Scene() {
     while (!script_vector.empty()) {
         delete script_vector.back();
         script_vector.pop_back();
     }
+}
+
+BackgroundAdder::BackgroundAdder(DrawableObject::Background background) 
+    : background_(background) {
+}
+
+void BackgroundAdder::Update() {
+    static auto& drawer = DrawManager::GetInstance();
+    drawer.AddDrawableObject(DrawableObject::FromBackground(background_));
 }

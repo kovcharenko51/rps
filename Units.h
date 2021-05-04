@@ -8,11 +8,15 @@ protected:
 
 public:
     enum UnitType {
-        None, Rock, Paper, Scissors
+        None        = -1, 
+        Rock        = 0, 
+        Scissors    = 1,
+        Paper       = 2, 
     };
     UnitType type = None;
     DrawableObject::State state = DrawableObject::Idle;
     DrawableObject::Unit sprite_type;
+    DrawableObject::Icon icon_type;
     explicit Unit(unsigned int = 0);
     void Attack();
     void Die();
@@ -26,14 +30,14 @@ public:
     RockUnit();
 };
 
-class PaperUnit : public Unit {
-public:
-    PaperUnit();
-};
-
 class ScissorsUnit : public Unit {
 public:
     ScissorsUnit();
+};
+
+class PaperUnit : public Unit {
+public:
+    PaperUnit();
 };
 
 class Knight : public RockUnit {

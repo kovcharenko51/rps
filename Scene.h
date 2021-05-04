@@ -19,9 +19,8 @@ public:
 
 class BackgroundAdder : public Script {
 protected:
-    Scene& scene_;
     DrawableObject::Background background_;
 public:
-    BackgroundAdder(Scene&, DrawableObject::Background);
+    BackgroundAdder(DrawableObject::Background);
     void Update() override;
 };

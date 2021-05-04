@@ -27,5 +27,6 @@ public:
     EconomicDecorator(Squad*, unsigned int&);
     bool InsertUnit(size_t, Unit*);
     void RemoveUnit(size_t);
+    const Squad& GetSquad();
     size_t GetSquadSize();
 };

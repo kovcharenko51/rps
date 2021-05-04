@@ -9,6 +9,7 @@ class DrawManager {
 private:
     const std::vector<std::string> texture_filenames_ = { 
         "Graphics/units.png",
+        "Graphics/units_icons.png",
         "Graphics/backgrounds.png",
     };
     std::unordered_map<std::string, sf::Texture> textures_;

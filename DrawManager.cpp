@@ -1,7 +1,7 @@
 #include "DrawManager.h"
 
 DrawManager::DrawManager()
-    : window_(sf::VideoMode(128, 72), "RoyalPhoenixStory", sf::Style::Close) {
+    : window_(sf::VideoMode(128, 72), "RoyalPhoenixStory") { //, sf::Style::Close) {
     for (const auto& filename: texture_filenames_) {
         if (!textures_[filename].loadFromFile(filename)) {
             throw std::runtime_error("Can't load " + filename);
@@ -66,7 +66,7 @@ DrawableObject DrawableObject::FromBackground(Background background) {
 
 DrawableObject DrawableObject::FromIcon(Icon icon) {
     const int tile_size = 8;
-    sf::IntRect rect((icon / 8) * tile_size, (icon % 8) * tile_size, tile_size, tile_size);
+    sf::IntRect rect((icon % 8) * tile_size, (icon / 8) * tile_size, tile_size, tile_size);
     return DrawableObject("Graphics/units_icons.png", rect);
 }
 
