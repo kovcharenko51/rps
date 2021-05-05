@@ -1,24 +1,14 @@
 #include "BattleScene.h"
 #include "BattleManager.h"
+#include "Factory.h"
 
 BattleDecorator BattleScene::SpawnEnemies() {
+    ForestFactory factory;
     enemy_squad_ = new Squad();
-    int size = std::rand() % 16;
+    int size = 3;
     for (int i = 0; i < size; ++i) {
-        int unit_ind = std::rand() % 3;
-        switch (unit_ind) {
-            case 0:
-                enemy_squad_->units.emplace_back(new Werewolf());
-                break;
-            case 1:
-                enemy_squad_->units.emplace_back(new WoodElf());
-                break;
-            case 2:
-                enemy_squad_->units.emplace_back(new Ent());
-                break;
-            default:
-                break;
-        }
+        auto unit = factory.CreateUnit(Unit::UnitType(i % 3));
+        enemy_squad_->units.emplace_back(unit);
     }
     enemy_decorator = BattleDecorator(enemy_squad_);
     return enemy_decorator;

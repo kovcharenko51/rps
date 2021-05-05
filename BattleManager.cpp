@@ -17,17 +17,12 @@ void BattleManager::Attack(BattleDecorator& ally_decorator, BattleDecorator& ene
     phase = AttackPhase;
 }
 
-bool BattleManager::CheckDeath(BattleDecorator& first_decorator, BattleDecorator& sec_decorator) {
-    Unit* left_unit = first_decorator.GetCurrentUnit();
-    Unit* right_unit = sec_decorator.GetCurrentUnit();
-    if ((left_unit->type == Unit::Rock) && (right_unit->type == Unit::Scissors)) {
-        return false;
-    } else if ((left_unit->type == Unit::Scissors) && (right_unit->type == Unit::Rock)) {
-        return true;
-    } else if (left_unit->type > right_unit->type) {
-        return false;
-    }
-    return true;
+bool BattleManager::CheckDeath(BattleDecorator& victim_decorator, BattleDecorator& attacker_decorator) {
+    Unit* victim_unit = victim_decorator.GetCurrentUnit();
+    Unit* attacker_unit = attacker_decorator.GetCurrentUnit();
+
+    return (victim_unit->type == attacker_unit->type) 
+        || (victim_unit->type == (attacker_unit->type + 1) % 3);
 }
 
 void BattleManager::Kill(BattleDecorator& ally_decorator, BattleDecorator& enemy_decorator) {
@@ -46,21 +41,17 @@ void BattleManager::Kill(BattleDecorator& ally_decorator, BattleDecorator& enemy
 }
 
 void BattleManager::Pop(BattleDecorator& ally_decorator, BattleDecorator& enemy_decorator) {
-    if (CheckDeath(ally_decorator, enemy_decorator)) {
-        ally_decorator.KillCurrentUnit();
-    }
-    if (CheckDeath(enemy_decorator, ally_decorator)) {
-        enemy_decorator.KillCurrentUnit();
-    }
+    bool kill_ally = CheckDeath(ally_decorator, enemy_decorator);
+    bool kill_enemy = CheckDeath(enemy_decorator, ally_decorator);
+
+    if (kill_ally) ally_decorator.KillCurrentUnit();
+    if (kill_enemy) enemy_decorator.KillCurrentUnit();
+
     freeze_time = 0.0f;
     phase = StartPhase;
 }
 
 void BattleManager::Update() {
-    if ((scene_.ally_decorator.GetSquadSize() == 0) || (scene_.enemy_decorator.GetSquadSize() == 0)) {
-        scene_.has_finished = true;
-        return;
-    }
     if (freeze_time <= 0) {
         switch (phase) {
             case StartPhase:
@@ -74,10 +65,15 @@ void BattleManager::Update() {
                 break;
             case KillPhase:
                 Pop(scene_.ally_decorator, scene_.enemy_decorator);
-                return;
+                break;
             default:
                 break;
         }
+    }
+    if ((scene_.ally_decorator.GetSquadSize() == 0) 
+        || (scene_.enemy_decorator.GetSquadSize() == 0)) {
+        scene_.has_finished = true;
+        return;
     }
     Unit* ally_unit = scene_.ally_decorator.GetCurrentUnit();
     Unit* enemy_unit = scene_.enemy_decorator.GetCurrentUnit();

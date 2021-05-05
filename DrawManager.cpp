@@ -1,7 +1,9 @@
 #include "DrawManager.h"
 
+const sf::Vector2i DrawManager::window_size = sf::Vector2i(128, 72);
+
 DrawManager::DrawManager()
-    : window_(sf::VideoMode(128, 72), "RoyalPhoenixStory") { //, sf::Style::Close) {
+    : window_(sf::VideoMode(window_size.x, window_size.y), "RoyalPhoenixStory") {
     for (const auto& filename: texture_filenames_) {
         if (!textures_[filename].loadFromFile(filename)) {
             throw std::runtime_error("Can't load " + filename);
@@ -53,11 +55,11 @@ bool DrawManager::IsOpen() const {
 
 DrawableObject DrawableObject::FromUnit(Unit unit, State state, bool is_on_right) {
     sf::IntRect rect(state * tile_size, unit * tile_size, tile_size, tile_size);
-    int xPosition = scaled_tile_size / 2;
-    xPosition = is_on_right ? DrawManager::GetInstance().GetWindow().getSize().x - xPosition : xPosition;
-    int yPosition = scaled_tile_size / 2;
-    int xScale = is_on_right ? -scale : scale;
-    int yScale = scale;
+    int xPosition = tile_size / 2;
+    xPosition = is_on_right ? DrawManager::window_size.x - xPosition : xPosition;
+    int yPosition = tile_size / 2;
+    int xScale = is_on_right ? -1 : 1;
+    int yScale = 1;
     return DrawableObject("Graphics/units.png", rect, sf::Vector2i(xPosition, yPosition), sf::Vector2i(xScale, yScale));
 }
 
@@ -65,7 +67,7 @@ DrawableObject DrawableObject::FromBackground(Background background) {
     const int width = 128;
     const int height = 72;
     sf::IntRect rect(0, background * height, width, height);
-    return DrawableObject("Graphics/backgrounds.png", rect, sf::Vector2i(0, 0), sf::Vector2i(scale, scale));
+    return DrawableObject("Graphics/backgrounds.png", rect);
 }
 
 DrawableObject DrawableObject::FromIcon(Icon icon) {

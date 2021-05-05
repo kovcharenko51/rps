@@ -25,6 +25,7 @@ public:
     virtual ~Unit() = default;
 };
 
+
 class RockUnit : public Unit {
 public:
     RockUnit();
@@ -40,25 +41,22 @@ public:
     PaperUnit();
 };
 
+
 class Knight : public RockUnit {
 public:
-    explicit Knight(unsigned int);
+    Knight();
 };
 
 class CrossbowMan : public ScissorsUnit {
 public:
-    explicit CrossbowMan(unsigned int);
+    CrossbowMan();
 };
 
 class Berserk : public PaperUnit {
 public:
-    explicit Berserk(unsigned int);
+    Berserk();
 };
 
-class Werewolf : public PaperUnit {
-public:
-    Werewolf();
-};
 
 class Ent : public RockUnit {
 public:
@@ -68,4 +66,9 @@ public:
 class WoodElf : public ScissorsUnit {
 public:
     WoodElf();
+};
+
+class Werewolf : public PaperUnit {
+public:
+    Werewolf();
 };

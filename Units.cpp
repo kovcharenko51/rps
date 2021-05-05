@@ -33,20 +33,17 @@ ScissorsUnit::ScissorsUnit() {
 }
 
 
-Knight::Knight(unsigned int cost) {
-    cost_ = cost;
+Knight::Knight() {
     sprite_type = DrawableObject::Knight;
     icon_type = DrawableObject::IconKnight;
 }
 
-Berserk::Berserk(unsigned int cost) {
-    cost_ = cost;
+Berserk::Berserk() {
     sprite_type = DrawableObject::Berserk;
     icon_type = DrawableObject::IconBerserk;
 }
 
-CrossbowMan::CrossbowMan(unsigned int cost) {
-    cost_ = cost;
+CrossbowMan::CrossbowMan() {
     sprite_type = DrawableObject::CrossbowMan;
     icon_type = DrawableObject::IconCrossbowMan;
 }

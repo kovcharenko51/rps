@@ -1,23 +1,23 @@
 #include "DrawManager.h"
 #include "SceneManager.h"
+#include "Factory.h"
 #include <vector>
 
 int main() {
     auto& drawer = DrawManager::GetInstance();
+    RoyalFactory factory;
     auto squad = new Squad();
-    squad->units.emplace_back(new CrossbowMan(10));
-    squad->units.emplace_back(new Knight(10));
-    squad->units.emplace_back(new CrossbowMan(10));
-    squad->units.emplace_back(new Berserk(10));
-    squad->units.emplace_back(new CrossbowMan(10));
-    squad->units.emplace_back(new Knight(10));
-    squad->units.emplace_back(new CrossbowMan(10));
-    squad->units.emplace_back(new Berserk(10));
+    for (int i = 0; i < 3; ++i) {
+        auto unit = factory.CreateUnit(Unit::UnitType(2));
+        squad->units.emplace_back(unit);
+    }
     sf::Clock game_clock;
     SceneManager scene_manager;
+    scene_manager.CreateScene(SceneManager::Battle, game_clock, squad);
 
     while (drawer.IsOpen()) {
-        if (scene_manager.GetScene()->has_finished) {
+        auto& current_scene = *scene_manager.GetScene();
+        if (current_scene.has_finished) {
             switch (scene_manager.cur_type) {
                 case SceneManager::Battle:
                     scene_manager.CreateScene(SceneManager::Economy, game_clock, squad);
@@ -29,9 +29,10 @@ int main() {
                     break;
             }
         }
-        scene_manager.GetScene()->Update();
+        current_scene.Update();
         game_clock.restart();
-        drawer.AddDrawableObjects(scene_manager.GetScene()->list_to_draw_);
+        drawer.AddDrawableObjects(current_scene.list_to_draw_);
         drawer.Draw();
+        current_scene.list_to_draw_.clear();
     }
 }

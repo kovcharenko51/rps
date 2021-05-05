@@ -6,6 +6,8 @@
 struct DrawableObject;
 
 class DrawManager {
+public:
+    static const sf::Vector2i window_size;
 private:
     const std::vector<std::string> texture_filenames_ = { 
         "Graphics/units.png",

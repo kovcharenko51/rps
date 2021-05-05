@@ -8,9 +8,11 @@ EconomyManager::EconomyManager(Scene& scene) : scene_(dynamic_cast<EconomyScene&
 void EconomyManager::Update() {
     static int index = 0;
     auto& decorator = scene_.decorator;
+    auto input = GetInput();
+    int min = 0, max = std::min(max_size - 1, static_cast<int>(decorator.GetSquadSize()));
+    index = std::max(min, std::min(index + input.x, max));
     bool is_last = index == decorator.GetSquadSize() 
         || index == decorator.GetSquadSize() - 1;
-    auto input = GetInput();
 
     DrawSquad();
 
@@ -21,9 +23,6 @@ void EconomyManager::Update() {
         DrawOptions(index);
         ChangeUnit(index, -input.y);
     }
-
-    int min = 0, max = std::min(max_size - 1, static_cast<int>(decorator.GetSquadSize()));
-    index = std::max(min, std::min(index + input.x, max));
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
         scene_.has_finished = true;
