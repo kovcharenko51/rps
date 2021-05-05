@@ -3,11 +3,18 @@
 #include <vector>
 
 int main() {
-    DrawManager& drawer = DrawManager::GetInstance();
+    auto& drawer = DrawManager::GetInstance();
     auto squad = new Squad();
+    squad->units.emplace_back(new CrossbowMan(10));
+    squad->units.emplace_back(new Knight(10));
+    squad->units.emplace_back(new CrossbowMan(10));
+    squad->units.emplace_back(new Berserk(10));
+    squad->units.emplace_back(new CrossbowMan(10));
+    squad->units.emplace_back(new Knight(10));
+    squad->units.emplace_back(new CrossbowMan(10));
+    squad->units.emplace_back(new Berserk(10));
     sf::Clock game_clock;
     SceneManager scene_manager;
-    scene_manager.CreateScene(SceneManager::Economy, game_clock, squad);
 
     while (drawer.IsOpen()) {
         if (scene_manager.GetScene()->has_finished) {

@@ -12,9 +12,9 @@ protected:
     BattleScene& scene_;
 public:
     enum BattlePhase {
-        PreparePhase, AttackPhase, KillPhase
+        StartPhase, PreparePhase, AttackPhase, KillPhase
     };
-    BattlePhase phase;
+    BattlePhase phase = StartPhase;
     BattleManager(Scene&);
     void Prepare(BattleDecorator&, BattleDecorator&);
     void Attack(BattleDecorator&, BattleDecorator&);

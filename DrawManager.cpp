@@ -51,17 +51,21 @@ bool DrawManager::IsOpen() const {
 }
 
 
-DrawableObject DrawableObject::FromUnit(Unit unit, State state) {
-    const int tile_size = 32;
+DrawableObject DrawableObject::FromUnit(Unit unit, State state, bool is_on_right) {
     sf::IntRect rect(state * tile_size, unit * tile_size, tile_size, tile_size);
-    return DrawableObject("Graphics/units.png", rect);
+    int xPosition = scaled_tile_size / 2;
+    xPosition = is_on_right ? DrawManager::GetInstance().GetWindow().getSize().x - xPosition : xPosition;
+    int yPosition = scaled_tile_size / 2;
+    int xScale = is_on_right ? -scale : scale;
+    int yScale = scale;
+    return DrawableObject("Graphics/units.png", rect, sf::Vector2i(xPosition, yPosition), sf::Vector2i(xScale, yScale));
 }
 
 DrawableObject DrawableObject::FromBackground(Background background) {
     const int width = 128;
     const int height = 72;
     sf::IntRect rect(0, background * height, width, height);
-    return DrawableObject("Graphics/backgrounds.png", rect);
+    return DrawableObject("Graphics/backgrounds.png", rect, sf::Vector2i(0, 0), sf::Vector2i(scale, scale));
 }
 
 DrawableObject DrawableObject::FromIcon(Icon icon) {
@@ -72,4 +76,8 @@ DrawableObject DrawableObject::FromIcon(Icon icon) {
 
 DrawableObject::DrawableObject(std::string filename, const sf::IntRect& rect, sf::Vector2i position, sf::Vector2i scale)
     : filename_(filename), rect_(rect), position_(position), scale_(scale) {
+}
+
+sf::Window& DrawManager::GetWindow() const {
+    return window_;
 }

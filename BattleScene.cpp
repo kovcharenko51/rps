@@ -26,7 +26,7 @@ BattleDecorator BattleScene::SpawnEnemies() {
 
 BattleScene::BattleScene(sf::Clock& clock, Squad* squad) : Scene(clock) {
     ally_decorator = BattleDecorator(squad);
-    enemy_decorator = BattleDecorator(enemy_squad_);
+    enemy_decorator = SpawnEnemies();
 
     script_vector.emplace_back(new BackgroundAdder(DrawableObject::Background::Forest));
     script_vector.emplace_back(new BattleManager(*this));

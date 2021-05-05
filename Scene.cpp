@@ -1,12 +1,13 @@
 #include "Scene.h"
 
 Scene::Scene(sf::Clock& clock) : clock(clock) {
+    has_finished = false;
 }
 
 void Scene::Update() {
     for (auto script : script_vector) {
-        script->freeze_time -= clock.getElapsedTime().asSeconds();
         script->Update();
+        script->freeze_time -= clock.getElapsedTime().asSeconds();
     }
 }
 

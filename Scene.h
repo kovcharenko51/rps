@@ -10,7 +10,7 @@ protected:
     sf::Clock& clock;
     std::vector<Script*> script_vector;
 public:
-    bool has_finished = false;
+    bool has_finished;
     Scene(sf::Clock&);
     void Update();
     std::vector<DrawableObject> list_to_draw_;
