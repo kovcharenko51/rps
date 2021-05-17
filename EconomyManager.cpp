@@ -3,13 +3,19 @@
 #include "Factory.h"
 
 EconomyManager::EconomyManager(Scene& scene) : scene_(dynamic_cast<EconomyScene&>(scene)) {
+    auto& decorator = scene_.decorator;
+    decorator.AddBalance(decorator.GetSquadSize());
 }
 
 void EconomyManager::Update() {
     static int index = 0;
     auto& decorator = scene_.decorator;
+    
     auto input = GetInput();
-    int min = 0, max = std::min(max_size - 1, static_cast<int>(decorator.GetSquadSize()));
+    int min = 0, max = max_size - 1;
+    max = std::min(max, static_cast<int>(decorator.GetSquadSize()));
+    max = std::min(max, static_cast<int>(decorator.GetSquadSize() 
+        + decorator.GetBalance() - 1));
     index = std::max(min, std::min(index + input.x, max));
     bool is_last = index == decorator.GetSquadSize() 
         || index == decorator.GetSquadSize() - 1;
@@ -43,10 +49,14 @@ void EconomyManager::DrawSquad() {
         drawer.AddDrawableObject(drawable);
     }
 
-    auto drawable = DrawableObject::FromIcon(DrawableObject::IconEmpty);
-    sf::Vector2i position(x_offset, y_offset);
-    drawable.position_ = position;
-    drawer.AddDrawableObject(drawable);
+    auto& decorator = scene_.decorator;
+    for (int coin = 0; coin < decorator.GetBalance(); ++coin) {
+        auto drawable = DrawableObject::FromIcon(DrawableObject::IconEmpty);
+        sf::Vector2i position(x_offset, y_offset);
+        drawable.position_ = position;
+        x_offset += x_delta;
+        drawer.AddDrawableObject(drawable);
+    }
 }
 
 /*

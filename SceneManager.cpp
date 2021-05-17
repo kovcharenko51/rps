@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 
 void SceneManager::CreateScene(SceneType scene_type, sf::Clock& clock, Squad* squad) {
-    static unsigned int balance = 0;
+    static unsigned int balance = 100;
     switch (scene_type) {
         case Battle:
             cur_scene_ = std::make_shared<BattleScene>(clock, squad);

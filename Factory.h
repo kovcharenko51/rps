@@ -4,9 +4,10 @@
 
 class UnitFactory {
 public:
-    enum BasicCost {
-        RockCost = 10, PaperCost = 20, ScissorsCost = 30
-    };
+    static unsigned int RockCost;
+    static unsigned int ScissorsCost;
+    static unsigned int PaperCost;
+
     virtual Unit* CreateUnit(Unit::UnitType) = 0;
     virtual void DeleteUnit(Unit*);
 };

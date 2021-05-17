@@ -44,17 +44,17 @@ public:
 
 class Knight : public RockUnit {
 public:
-    Knight();
+    explicit Knight(unsigned int);
 };
 
 class CrossbowMan : public ScissorsUnit {
 public:
-    CrossbowMan();
+    explicit CrossbowMan(unsigned int);
 };
 
 class Berserk : public PaperUnit {
 public:
-    Berserk();
+    explicit Berserk(unsigned int);
 };
 
 

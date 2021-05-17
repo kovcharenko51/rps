@@ -7,13 +7,9 @@ int main() {
     auto& drawer = DrawManager::GetInstance();
     RoyalFactory factory;
     auto squad = new Squad();
-    for (int i = 0; i < 3; ++i) {
-        auto unit = factory.CreateUnit(Unit::UnitType(2));
-        squad->units.emplace_back(unit);
-    }
     sf::Clock game_clock;
     SceneManager scene_manager;
-    scene_manager.CreateScene(SceneManager::Battle, game_clock, squad);
+    scene_manager.CreateScene(SceneManager::Economy, game_clock, squad);
 
     while (drawer.IsOpen()) {
         auto& current_scene = *scene_manager.GetScene();

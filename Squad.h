@@ -29,4 +29,6 @@ public:
     void RemoveUnit(size_t);
     const Squad& GetSquad();
     size_t GetSquadSize();
+    unsigned int GetBalance();
+    void AddBalance(unsigned int);
 };
