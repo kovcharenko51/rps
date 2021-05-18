@@ -2,11 +2,10 @@
 
 #include "Factory.h"
 
-
 BattleDecorator::BattleDecorator(Squad* squad) : squad_(squad) {
 }
 
-const Unit* BattleDecorator::GetCurrentUnit() {
+Unit* BattleDecorator::GetCurrentUnit() {
     return squad_->units.back();
 }
 
@@ -39,6 +38,18 @@ void EconomicDecorator::RemoveUnit(size_t ind) {
     squad_->units.erase(squad_->units.begin() + ind);
 }
 
+const Squad& EconomicDecorator::GetSquad() {
+    return *squad_;
+}
+
 size_t EconomicDecorator::GetSquadSize() {
     return squad_->units.size();
+}
+
+unsigned int EconomicDecorator::GetBalance() {
+    return balance_;
+}
+
+void EconomicDecorator::AddBalance(unsigned int coins) {
+    balance_ += coins;
 }

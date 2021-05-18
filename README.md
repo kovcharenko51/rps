@@ -1,9 +1,14 @@
 
-to install
-mkdir build && cd build && cmake .. && make
+From main dir:
 
-to run 
-../bin/RPS
+to install
+```mkdir build && cd build && cmake .. && make && cd ..```
+
+to run
+```./bin/RPS```
 
 to uninstall
-cd .. && rm -rf build bin
+```rm -rf build bin```
+
+# Requires:
+sfml(```sudo apt-get install libsfml-dev```)

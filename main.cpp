@@ -1,95 +1,34 @@
-#include <iostream>
-#include <limits>
+#include "DrawManager.h"
+#include "SceneManager.h"
 #include "Factory.h"
-#include "Squad.h"
-
-void show_state(const Squad&, const unsigned int&);
-void show_possible_commands();
-void show_message(const std::string&);
+#include <vector>
 
 int main() {
+    auto& drawer = DrawManager::GetInstance();
     RoyalFactory factory;
-    Squad squad;
-    unsigned int balance = 1000;
+    auto squad = new Squad();
+    sf::Clock game_clock;
+    SceneManager scene_manager;
+    scene_manager.CreateScene(SceneManager::Economy, game_clock, squad);
 
-    EconomicDecorator economic_decorator(&squad, balance);
-
-    while (true) {
-        system("clear");
-        show_state(squad, balance);
-        show_possible_commands();
-        char query;
-        std::cin >> query;
-        switch (query) {
-        case 'i': {
-            int position;
-            char type_symbol;
-            std::cin >> position >> type_symbol; 
-            if (0 > position || position > economic_decorator.GetSquadSize()) {
-                show_message("Wrong position!\n");
-                continue;
+    while (drawer.IsOpen()) {
+        auto& current_scene = *scene_manager.GetScene();
+        if (current_scene.has_finished) {
+            switch (scene_manager.cur_type) {
+                case SceneManager::Battle:
+                    scene_manager.CreateScene(SceneManager::Economy, game_clock, squad);
+                    break;
+                case SceneManager::Economy:
+                    scene_manager.CreateScene(SceneManager::Battle, game_clock, squad);
+                    break;
+                default:
+                    break;
             }
-            Unit::UnitType unit_type;
-            switch (type_symbol) {
-            case 'R': unit_type = Unit::UnitType::Rock; break;
-            case 'P': unit_type = Unit::UnitType::Paper; break;
-            case 'S': unit_type = Unit::UnitType::Scissors; break;
-            default:
-                show_message("Wrong unit type!\nUse 'R', 'P' or 'S'!\n");
-                continue;
-            } 
-            Unit* unit = factory.CreateUnit(unit_type);
-            bool succes = economic_decorator.InsertUnit(position, unit);
-            if (!succes) {
-                show_message("Not enough money!\n");
-                delete unit;
-            }
-        } break;
-
-        case 'r': {
-            int position;
-            std::cin >> position;
-            if (0 > position || position > economic_decorator.GetSquadSize()) {
-                show_message("Wrong position!\n");
-                continue;
-            }
-            economic_decorator.RemoveUnit(position);
-        } break;
-
-        case 'q': return 0;
-
-        default:
-            break;
         }
+        current_scene.Update();
+        game_clock.restart();
+        drawer.AddDrawableObjects(current_scene.list_to_draw_);
+        drawer.Draw();
+        current_scene.list_to_draw_.clear();
     }
-}
-
-void show_state(const Squad& squad, const unsigned int& balance) {
-    std::cout << "balance: " << balance << "\t";
-    std::cout << "_"; 
-    for (const auto& unit: squad.units) {
-        char representation = 'x';
-        switch (unit->type) {
-        case Unit::UnitType::Rock:      representation = 'R'; break;
-        case Unit::UnitType::Paper:     representation = 'P'; break;
-        case Unit::UnitType::Scissors:  representation = 'S'; break;
-        }
-        std::cout << representation;
-    }
-    std::cout << "_" << std::endl;
-}
-
-void show_possible_commands() {
-    std::cout << "\033[1;030m";
-    std::cout << "i <position : int> <unit type : {'R','P','S'}>    insert unit on position\n";
-    std::cout << "r <position : int>                                remove unit on position\n";
-    std::cout << "q                                                 quit\n";
-    std::cout << "\033[0m";
-}
-
-void show_message(const std::string& message) {
-    std::cout << message;
-    std::cout << std::endl << "Press <Enter> to continue...";
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cin.get();
 }
