@@ -1,15 +1,19 @@
 #pragma once
 
 class Unit {
-private:
-    void Attack();
-    void Die();
-    void Idle();
+protected:
+    unsigned int cost_ = 0;
+
 public:
     enum UnitType {
         None, Rock, Paper, Scissors
     };
     UnitType type = None;
+    explicit Unit(unsigned int = 0);
+    void Attack();
+    void Die();
+    void Idle();
+    unsigned int GetCost();
 };
 
 class RockUnit : public Unit {
@@ -29,15 +33,17 @@ public:
 
 class Knight : public RockUnit {
 public:
-    // Concrete sprites will be stored here
+    explicit Knight(unsigned int);
 };
 
 class CrossbowMan : public ScissorsUnit {
-    // Concrete sprites will be stored here
+public:
+    explicit CrossbowMan(unsigned int);
 };
 
 class Berserk : public PaperUnit {
-    // Concrete sprites will be stored here
+public:
+    explicit Berserk(unsigned int);
 };
 
 class Werewolf : public PaperUnit {

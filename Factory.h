@@ -4,24 +4,21 @@
 
 class UnitFactory {
 public:
-    virtual RockUnit& CreateRockUnit() = 0;
-    virtual PaperUnit& CreatePaperUnit() = 0;
-    virtual ScissorsUnit& CreateScissorsUnit() = 0;
-
+    enum BasicCost {
+        RockCost = 10, PaperCost = 20, ScissorsCost = 30
+    };
+    virtual Unit* CreateUnit(Unit::UnitType) = 0;
+    virtual void DeleteUnit(Unit*);
 };
 
 class RoyalFactory : public UnitFactory {
 public:
-    RockUnit& CreateRockUnit() override;
-    PaperUnit& CreatePaperUnit() override;
-    ScissorsUnit& CreateScissorsUnit() override;
+    Unit* CreateUnit(Unit::UnitType) override;
 
 };
 
 class ForestFactory : public UnitFactory {
 public:
-    RockUnit& CreateRockUnit() override;
-    PaperUnit& CreatePaperUnit() override;
-    ScissorsUnit& CreateScissorsUnit() override;
+    Unit* CreateUnit(Unit::UnitType) override;
 
 };

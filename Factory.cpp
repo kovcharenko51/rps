@@ -1,26 +1,44 @@
 #include "Factory.h"
 
-RockUnit& RoyalFactory::CreateRockUnit() {
-    return *(new Knight);
+#include <iostream>
+
+void UnitFactory::DeleteUnit(Unit* unit) {
+    delete unit;
 }
 
-PaperUnit& RoyalFactory::CreatePaperUnit()  {
-    return *(new Berserk);
+Unit* RoyalFactory::CreateUnit(Unit::UnitType unit_type) {
+    Unit* unit;
+    std::cerr << "creating " << (int)unit_type << std::endl;
+    switch (unit_type) {
+        case Unit::Rock:
+            unit = new Knight(RockCost);
+            break;
+        case Unit::Paper:
+            unit = new Berserk(PaperCost);
+            break;
+        case Unit::Scissors:
+            unit = new CrossbowMan(ScissorsCost);
+            break;
+        case Unit::None:
+            unit = nullptr;
+    }
+    return unit;
 }
 
-ScissorsUnit& RoyalFactory::CreateScissorsUnit() {
-    return *(new CrossbowMan);
-}
-
-
-RockUnit& ForestFactory::CreateRockUnit() {
-    return *(new Ent);
-}
-
-PaperUnit& ForestFactory::CreatePaperUnit() {
-    return *(new Werewolf);
-}
-
-ScissorsUnit& ForestFactory::CreateScissorsUnit() {
-    return *(new WoodElf);
+Unit* ForestFactory::CreateUnit(Unit::UnitType unit_type) {
+    Unit* unit;
+    switch (unit_type) {
+        case Unit::Rock:
+            unit = new Ent();
+            break;
+        case Unit::Paper:
+            unit = new Werewolf();
+            break;
+        case Unit::Scissors:
+            unit = new WoodElf();
+            break;
+        case Unit::None:
+            unit = nullptr;
+    }
+    return unit;
 }
